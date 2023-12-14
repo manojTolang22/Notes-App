@@ -54,14 +54,14 @@ class DbService {
     });
   }
 
-  //to update exixting/not deleted note
+ 
   Future<int> updateExistingNote(int id, String? title, String? body) async {
     return await SQFliteDb.update(_notesTable,
         {"title": title, "body": body, "createdAt": DateTime.now().toString()},
         where: "id=?", whereArgs: [id]);
   }
 
-  //to store note into the trash been
+   
   Future<int>  deleteNote(int id) async {
     return await SQFliteDb.update(
       _notesTable,
@@ -70,31 +70,4 @@ class DbService {
       whereArgs: [id],
     );
   }
-
-  /// delete delete permanently
-  // Future<int> deletNotePermanently(int id) async {
-  //   return await SQFliteDb.delete(_notesTable, where: "id=?", whereArgs: [id]);
-  // }
-
-// //to recycle the deleted note
-//   Future<int> recycleTheDeletedNote(int id) async {
-//     return await SQFliteDb.update(_notesTable,
-//         {"isDeleted": false, "createdAt": DateTime.now().toString()},
-//         where: "id=?", whereArgs: [id]);
-//   }
 }
-
-// class DbServiceClass {
-//   Future<Database> getDatabaseInstance() async {
-//     final directory = await getApplicationDocumentsDirectory();
-//     String path = join(directory.path, "person.db");
-//     return await openDatabase(path, version: 1,
-//         onCreate: (Database db, int version) async {
-//       await db.execute(''' CREATE TABLE IF NOT EXISTS Person(
-//                          id  INTEGER PRIMARY KEY AUTOINCREMENT,
-//                           name VARCHAR(80),
-//                           city  TEXT
-//                                     );''');
-//     });
-//   }
-// }
